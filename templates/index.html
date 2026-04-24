@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humanitarian Evacuation Route Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="page">
+        <section class="hero">
+            <div>
+                <p class="eyebrow">Algorithmic Crisis Response</p>
+                <h1>Humanitarian Evacuation Route Planning System</h1>
+                <p class="summary">Uses Dijkstra's algorithm and BFS to recommend evacuation routes under blocked roads, danger scores, mobility limits, and safe-zone capacity constraints.</p>
+            </div>
+            <div class="card stat-card">
+                <h3>Scenario Summary</h3>
+                <p>{{ graph.summary() }}</p>
+            </div>
+        </section>
+
+        <section class="grid">
+            <form method="POST" class="card form-card">
+                <h2>Plan Evacuation</h2>
+
+                <label for="source">Civilian Source</label>
+                <select name="source" id="source">
+                    {% for source in sources %}
+                    <option value="{{ source.id }}" {% if source.id == selected_source %}selected{% endif %}>{{ source.name }} ({{ source.id }})</option>
+                    {% endfor %}
+                </select>
+
+                <label for="mobility">Mobility Type</label>
+                <select name="mobility" id="mobility">
+                    <option value="vehicle" {% if selected_mobility == 'vehicle' %}selected{% endif %}>Vehicle</option>
+                    <option value="on_foot" {% if selected_mobility == 'on_foot' %}selected{% endif %}>On Foot</option>
+                    <option value="injured" {% if selected_mobility == 'injured' %}selected{% endif %}>Injured</option>
+                </select>
+
+                <label for="group_size">Group Size</label>
+                <input type="number" name="group_size" id="group_size" min="1" value="{{ group_size }}">
+
+                <label class="check-row">
+                    <input type="checkbox" name="prefer_safety" {% if prefer_safety %}checked{% endif %}>
+                    Prefer safer routes first
+                </label>
+
+                <button type="submit">Run Planner</button>
+            </form>
+
+            <section class="card">
+                <h2>Safe Zones</h2>
+                <div class="safe-zone-list">
+                    {% for zone in safe_zones %}
+                    <div class="safe-zone">
+                        <strong>{{ zone.name }}</strong>
+                        <span>{{ zone.available_slots }} available slots</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </section>
+
+        {% if result %}
+        <section class="card results">
+            <h2>Execution Result</h2>
+            <p class="message">{{ result.message }}</p>
+
+            {% if result.path %}
+            <div class="metrics">
+                <div><span>Route</span><strong>{{ result.path.route }}</strong></div>
+                <div><span>Distance</span><strong>{{ result.path.distance }} km</strong></div>
+                <div><span>Estimated Time</span><strong>{{ result.path.time_minutes }} min</strong></div>
+                <div><span>Max Danger</span><strong>{{ result.path.max_danger }}/10</strong></div>
+                <div><span>Avg Danger</span><strong>{{ result.path.avg_danger }}/10</strong></div>
+                <div><span>Composite Cost</span><strong>{{ result.path.cost }}</strong></div>
+                <div><span>Risk Status</span><strong>{{ result.path.risk }}</strong></div>
+            </div>
+
+            {% if result.path.warnings %}
+            <div class="warnings">
+                <h3>Warnings</h3>
+                {% for warning in result.path.warnings %}
+                <p>{{ warning }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endif %}
+
+            <div class="reachability">
+                <h3>BFS Reachability</h3>
+                <p>Reachable safe zones: {{ result.reachability.reachable_safe }}</p>
+                <p>Cut-off safe zones: {{ result.reachability.unreachable_safe }}</p>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+</body>
+</html>
