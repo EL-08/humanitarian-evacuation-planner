@@ -1,9 +1,8 @@
 
 
-## Main Algorithms
+## Report
 
-- **Dijkstra's Algorithm**: Finds the lowest-cost evacuation route using a composite cost based on travel time and danger.
-- **Breadth-First Search (BFS)**: Finds reachable safe zones when weighted road data is unavailable or when a fast reachability check is needed.
+- **Refer to Report.md**
 
 ## Project Structure
 
