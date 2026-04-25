@@ -1,55 +1,109 @@
-# Humanitarian Evacuation Route Planning System
-**Capstone Project — Algorithmic Design for Crisis Response**
+# HUMANITARIAN EVACUATION ROUTE PLANNING SYSTEM
+## Capstone Project Report
+
+---
 
 ## 1. Description of the Project
-- **PROBLEM CONTEXT**:
-    In armed conflict zones, civilians must evacuate through road networks that are partially destroyed, blocked by hostilities, or controlled by armed groups. Aid organizations need to identify the SAFEST and FASTEST routes for mass evacuation under severe uncertainty.
+Given a conflict-zone road network, the system computes evacuation routes that balance **travel time** and **danger exposure**. Locations (villages, checkpoints, safe zones) are modeled as nodes, and roads as weighted edges with dynamic attributes (status, danger).
 
-- **REAL-WORLD CONSTRAINTS MODELED**:
-    - Roads can be BLOCKED (impassable), DAMAGED (slow), or CLEAR
-    - Each road segment has a DANGER SCORE (0–10) based on proximity to conflict, checkpoints, or recent incidents
-    - Civilian groups have varying MOBILITY (on foot, vehicle, injured)
-    - Safe zones have limited CAPACITY — once full, they reject new arrivals
-    - The graph can be updated in real time as conditions change
+The system supports:
+- Optimal pathfinding to safe zones (Dijkstra)
+- Reachability analysis under uncertainty (BFS)
+- Capacity-aware evacuation planning (safe zones can fill)
 
-- **DATA STRUCTURES**:
-    - Graph: adjacency list (dict of dicts) for O(1) neighbor lookup
-    - Priority Queue: min-heap (heapq) for Dijkstra's O((V+E) log V)
-    - BFS Queue: collections.deque for O(1) popleft
+Input: graph + source location + mobility type  
+Output: evacuation route + risk/time metrics + warnings  
 
+---
 
 ## 2. Significance of the Project
+This models real humanitarian constraints:
+- Incomplete/dynamic information (roads change status)
+- Resource limits (safe zone capacity)
+- Trade-offs (fast vs safe routes)
 
+Novel aspects:
+- Composite cost function combining normalized time and danger  
+- Fallback strategies (BFS when optimal routing fails)  
+- Real-time updates (road destruction, congestion)
+
+---
 
 ## 3. Code Structure
+/project
+  ├── main.py
+  ├── models.py
+  ├── graph.py
+  ├── algorithms.py
+  ├── planner.py
+  ├── scenario.py
 
-```text
-app.py
-main.py
-evacuation_system/
-├── constants.py
-├── models.py
-├── graph.py
-├── algorithms.py
-├── planner.py
-└── scenario.py
-```
+Flow:
+Scenario builds graph → Planner runs BFS → Dijkstra → Outputs structured results
 
-## 4. Algorithms
+---
 
-- **PRIMARY ALGORITHMS**:
-    1. Dijkstra's Algorithm  — finds the lowest-cost evacuation path through
-                               a weighted road graph (cost = danger + time)
-    2. BFS (Breadth-First)   — finds ALL reachable safe zones within a given
-                               number of hops (for when roads are unweighted
-                               or weight data is unavailable)
+## 4. Description of Algorithms
+
+### Dijkstra’s Algorithm
+- Cost = 0.6(time) + 0.4(danger)
+- Uses priority queue (min-heap)
+- Avoids blocked and high-danger paths
+
+Time Complexity: O((V + E) log V)
+
+---
+
+### BFS (Breadth-First Search)
+Used for:
+- Reachability
+- Fallback routing
+
+Time Complexity: O(V + E)
+
+---
 
 ## 5. Verification of Algorithms
+Example:
+A → B (safe), A → C (dangerous), B → D (safe zone)
 
+Dijkstra selects A → B → D due to lower risk.
+BFS confirms D is reachable.
+
+---
 
 ## 6. Execution Results and Analysis
+- Vehicle routes prioritize safety and speed balance
+- On-foot routes increase time weight
+- Dynamic updates trigger rerouting
+
+Observations:
+- Mobility impacts path selection
+- System adapts to changing conditions
+- Capacity constraints affect outcomes
+
+---
 
 ## 7. Conclusions
+- Dijkstra effective with composite cost
+- BFS useful fallback
+- Trade-offs unavoidable (safety vs speed)
+
+Limitations:
+- Static danger scores
+- No congestion modeling
+- Simplified geography
+
+---
 
 ## 8. AI Usage
+AI assisted with:
+- Structuring project
+- Refactoring code
 
+Core algorithms were manually designed and verified.
+
+---
+
+## 9. Conclusion
+The system shows that Dijkstra can be adapted with a composite cost function to balance safety and efficiency, while BFS provides reliable fallback under uncertainty. Results highlight how constraints like road conditions, mobility differences, and safe zone capacity directly impact route selection and feasibility. Key limitations include static danger modeling, lack of congestion handling, and simplified real-world assumptions. Overall, the project demonstrates practical application of graph algorithms, complexity analysis, and trade-off reasoning in a real-world crisis scenario.
