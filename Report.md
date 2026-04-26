@@ -37,14 +37,28 @@ Novel aspects:
 ---
 
 ## 3. Code Structure
-/project
-  ├── main.py
-  ├── models.py
-  ├── graph.py
-  ├── algorithms.py
-  ├── planner.py
-  ├── scenario.py
-
+```text
+humanitarian_evacuation_route_planner/
+├── app.py                         # Flask web application
+├── main.py                        # Command-line demo
+├── requirements.txt               # Python dependencies
+├── README.md                      # Project instructions
+├── Report.md                      # Draft project report
+├── evacuation_system/
+│   ├── __init__.py
+│   ├── constants.py               # Enums and shared constants
+│   ├── models.py                  # Data models
+│   ├── graph.py                   # Evacuation graph class
+│   ├── algorithms.py              # Dijkstra and BFS helper functions
+│   ├── planner.py                 # High-level evacuation planner
+│   └── scenario.py                # Sample scenario builder
+├── templates/
+│   └── index.html                 # Web UI template
+├── static/
+│   └── style.css                  # Web UI styling
+└── tests/
+    └── test_algorithms.py         # Basic algorithm tests
+```
 Flow:
 Scenario builds graph → Planner runs BFS → Dijkstra → Outputs structured results
 
@@ -120,5 +134,5 @@ The system shows that Dijkstra can be adapted with a composite cost function to 
 ---
 
 ## Contributions
-Michael - Creating the beta and final main code. Writing part of the report.
-Eric - Creating the UI, the github page, the sample inputs, and the MD's. Reorganizing the main code.
+- Michael: Creating the beta and final main code. Writing part of the report.
+- Eric: Creating the UI, the github page, the sample inputs, and the MD's. Reorganizing the main code.
