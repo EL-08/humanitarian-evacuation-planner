@@ -11,8 +11,15 @@ The system supports:
 - Reachability analysis under uncertainty (BFS)
 - Capacity-aware evacuation planning (safe zones can fill)
 
-Input: graph + source location + mobility type  
-Output: evacuation route + risk/time metrics + warnings  
+Input: 
+- graph
+- source location
+- mobility type
+
+Output: 
+- evacuation route 
+- risk/time metrics
+- warnings  
 
 ---
 
@@ -94,6 +101,11 @@ Limitations:
 - No congestion modeling
 - Simplified geography
 
+Application of Course Learning:
+- Priority queue / min-heap
+- Algorithm design and complexity analysis
+- Trade-off reasoning
+
 ---
 
 ## 8. AI Usage
@@ -107,3 +119,10 @@ Core algorithms were manually designed and verified.
 
 ## 9. Conclusion
 The system shows that Dijkstra can be adapted with a composite cost function to balance safety and efficiency, while BFS provides reliable fallback under uncertainty. Results highlight how constraints like road conditions, mobility differences, and safe zone capacity directly impact route selection and feasibility. Key limitations include static danger modeling, lack of congestion handling, and simplified real-world assumptions. Overall, the project demonstrates practical application of graph algorithms, complexity analysis, and trade-off reasoning in a real-world crisis scenario.
+
+---
+
+## Contributions
+Michael - Creating the beta and final main code. Writing part of the report.
+Eric - Creating the UI, the github page, the sample inputs, and the MD's. Reorganizing the main code.
+
