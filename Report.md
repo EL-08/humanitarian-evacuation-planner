@@ -90,41 +90,6 @@ Observations:
 - Capacity constraints affect 
 
 ---
-<<<<<<< HEAD
-=======
-
-## 7. AI Usage
-AI assisted with:
-- Structuring project
-- Refactoring code
-
-Core algorithms were manually designed and verified.
-
----
-
-## 8. Conclusion
-- Dijkstra effective with composite cost
-- BFS useful fallback
-- Trade-offs unavoidable (safety vs speed)
-
-Limitations:
-- Static danger scores
-- No congestion modeling
-- Simplified geography
-
-Application of Course Learning:
-- Priority queue / min-heap
-- Algorithm design and complexity analysis
-- Trade-off reasoning
-
-The system shows that Dijkstra can be adapted with a composite cost function to balance safety and efficiency, while BFS provides reliable fallback under uncertainty. Results highlight how constraints like road conditions, mobility differences, and safe zone capacity directly impact route selection and feasibility. Key limitations include static danger modeling, lack of congestion handling, and simplified real-world assumptions. Overall, the project demonstrates practical application of graph algorithms, complexity analysis, and trade-off reasoning in a real-world crisis scenario.
-
----
-
-## Contributions
-Michael - Creating the beta and final main code. Writing part of the report.
-Eric - Creating the UI, the github page, the sample inputs, and the MD's. Reorganizing the main code.
->>>>>>> afc1bac3979938db7dd0b86d02c99372ea2dbb85
 
 ## 7. AI Usage
 AI assisted with:
