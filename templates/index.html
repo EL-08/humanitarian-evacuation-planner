@@ -20,6 +20,50 @@
             </div>
         </section>
 
+        <section class="card map-card">
+            <div class="map-heading">
+                <div>
+                    <h2>Road Network Visualization</h2>
+                    <p>Each road displays distance, danger score, and composite cost. A planned route is highlighted after running the planner.</p>
+                </div>
+                <div class="legend">
+                    <span><i class="legend-line clear"></i>Clear</span>
+                    <span><i class="legend-line damaged"></i>Damaged</span>
+                    <span><i class="legend-line blocked"></i>Blocked</span>
+                    <span><i class="legend-line route"></i>Selected Route</span>
+                </div>
+            </div>
+
+            <svg class="network-map" viewBox="0 0 {{ graph_view.width }} {{ graph_view.height }}" role="img" aria-label="Evacuation road network map">
+                {% for road in graph_view.roads %}
+                <line
+                    class="road road-{{ road.status }} {% if road.is_route %}road-route{% endif %}"
+                    x1="{{ road.x1 }}"
+                    y1="{{ road.y1 }}"
+                    x2="{{ road.x2 }}"
+                    y2="{{ road.y2 }}"
+                    aria-label="{{ road.from_id }} to {{ road.to_id }} distance {{ road.distance }} kilometers danger {{ road.danger }} cost {{ road.cost }}"
+                />
+
+                <text
+                    class="road-label"
+                    x="{{ (road.x1 + road.x2) / 2 }}"
+                    y="{{ (road.y1 + road.y2) / 2 }}"
+                >
+                    {{ road.distance }}km | Danger: {{ road.danger }}
+                </text>
+                {% endfor %}
+
+                {% for node in graph_view.nodes %}
+                <g class="node node-{{ node.type }}">
+                    <circle cx="{{ node.x }}" cy="{{ node.y }}" r="10"></circle>
+                    <text class="node-label" x="{{ node.x + 13 }}" y="{{ node.y - 8 }}">{{ node.id }}</text>
+                    <text class="node-type" x="{{ node.x + 13 }}" y="{{ node.y + 7 }}">{{ node.type.replace('_', ' ') }}</text>
+                </g>
+                {% endfor %}
+            </svg>
+        </section>
+
         <section class="grid">
             <form method="POST" class="card form-card">
                 <h2>Plan Evacuation</h2>

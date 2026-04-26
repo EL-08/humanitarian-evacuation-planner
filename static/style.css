@@ -158,3 +158,144 @@ button {
         grid-template-columns: 1fr;
     }
 }
+
+.map-card {
+    margin-bottom: 20px;
+}
+
+.map-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+}
+
+.map-heading p {
+    margin: 0;
+    color: #57606a;
+}
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 13px;
+    color: #57606a;
+}
+
+.legend span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-line {
+    display: inline-block;
+    width: 26px;
+    height: 4px;
+    border-radius: 99px;
+    background: #8c959f;
+}
+
+.legend-line.clear {
+    background: #2da44e;
+}
+
+.legend-line.damaged {
+    background: #bf8700;
+}
+
+.legend-line.blocked {
+    background: #cf222e;
+}
+
+.legend-line.route {
+    background: #1f6feb;
+}
+
+.network-map {
+    width: 100%;
+    min-height: 360px;
+    border: 1px solid #d8dee4;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+.road {
+    stroke-width: 4;
+    stroke-linecap: round;
+    opacity: 0.8;
+}
+
+.road-clear {
+    stroke: #2da44e;
+}
+
+.road-damaged {
+    stroke: #bf8700;
+    stroke-dasharray: 8 6;
+}
+
+.road-blocked {
+    stroke: #cf222e;
+    stroke-dasharray: 4 8;
+}
+
+.road-route {
+    stroke: #1f6feb;
+    stroke-width: 7;
+    opacity: 1;
+}
+
+.road-label {
+    font-size: 11px;
+    fill: #57606a;
+    paint-order: stroke;
+    stroke: #f8fafc;
+    stroke-width: 4px;
+}
+
+.node circle {
+    stroke: white;
+    stroke-width: 3;
+}
+
+.node-civilian circle {
+    fill: #8250df;
+}
+
+.node-safe_zone circle {
+    fill: #2da44e;
+}
+
+.node-medical circle {
+    fill: #0969da;
+}
+
+.node-checkpoint circle {
+    fill: #bf8700;
+}
+
+.node-label {
+    font-size: 12px;
+    font-weight: bold;
+    fill: #1f2933;
+    paint-order: stroke;
+    stroke: #f8fafc;
+    stroke-width: 4px;
+}
+
+.node-type {
+    font-size: 10px;
+    fill: #57606a;
+    paint-order: stroke;
+    stroke: #f8fafc;
+    stroke-width: 4px;
+}
+
+@media (max-width: 800px) {
+    .map-heading {
+        flex-direction: column;
+    }
+}

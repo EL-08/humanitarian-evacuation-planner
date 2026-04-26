@@ -22,17 +22,19 @@ def build_sample_scenario() -> EvacuationGraph:
         graph.add_location(location)
 
     roads = [
-        Road("VILLAGE_A", "TOWN_CENTER", distance_km=8, base_speed_kmh=60, status=RoadStatus.DAMAGED, danger_score=5.0),
-        Road("VILLAGE_A", "VILLAGE_B", distance_km=3, base_speed_kmh=40, status=RoadStatus.CLEAR, danger_score=1.5),
-        Road("VILLAGE_A", "CAMP_NORTH", distance_km=5, base_speed_kmh=50, status=RoadStatus.CLEAR, danger_score=1.0),
-        Road("VILLAGE_B", "CROSSROADS", distance_km=15, base_speed_kmh=60, status=RoadStatus.BLOCKED, danger_score=9.0),
-        Road("VILLAGE_B", "MEDICAL_POST", distance_km=7, base_speed_kmh=40, status=RoadStatus.CLEAR, danger_score=2.0),
-        Road("TOWN_CENTER", "UN_COMPOUND", distance_km=12, base_speed_kmh=70, status=RoadStatus.CLEAR, danger_score=3.0),
+        Road("VILLAGE_A", "TOWN_CENTER", distance_km=8, base_speed_kmh=60, status=RoadStatus.DAMAGED, danger_score=3.0),
+        Road("VILLAGE_A", "VILLAGE_B", distance_km=3, base_speed_kmh=40, status=RoadStatus.DAMAGED, danger_score=5.5),
+        Road("VILLAGE_A", "CAMP_NORTH", distance_km=5, base_speed_kmh=50, status=RoadStatus.CLEAR, danger_score=3.0),
+        Road("VILLAGE_B", "CROSSROADS", distance_km=15, base_speed_kmh=60, status=RoadStatus.CLEAR, danger_score=3.0),
+        Road("VILLAGE_B", "MEDICAL_POST", distance_km=6, base_speed_kmh=40, status=RoadStatus.CLEAR, danger_score=5.0),
+        Road("TOWN_CENTER", "UN_COMPOUND", distance_km=12, base_speed_kmh=70, status=RoadStatus.BLOCKED, danger_score=1.0),
         Road("TOWN_CENTER", "MEDICAL_POST", distance_km=4, base_speed_kmh=50, status=RoadStatus.CLEAR, danger_score=2.5),
-        Road("CROSSROADS", "REFUGEE_CAMP", distance_km=10, base_speed_kmh=60, status=RoadStatus.CLEAR, danger_score=4.0),
-        Road("UN_COMPOUND", "REFUGEE_CAMP", distance_km=6, base_speed_kmh=60, status=RoadStatus.CLEAR, danger_score=0.5),
-        Road("MEDICAL_POST", "UN_COMPOUND", distance_km=9, base_speed_kmh=50, status=RoadStatus.CLEAR, danger_score=2.0),
-        Road("CAMP_NORTH", "UN_COMPOUND", distance_km=8, base_speed_kmh=65, status=RoadStatus.CLEAR, danger_score=0.8),
+        Road("TOWN_CENTER", "CAMP_NORTH", distance_km=14, base_speed_kmh=70, status=RoadStatus.CLEAR, danger_score=5.2),
+        Road("CROSSROADS", "REFUGEE_CAMP", distance_km=15, base_speed_kmh=60, status=RoadStatus.CLEAR, danger_score=2.0),
+        Road("UN_COMPOUND", "REFUGEE_CAMP", distance_km=10, base_speed_kmh=60, status=RoadStatus.CLEAR, danger_score=1.5),
+        Road("MEDICAL_POST", "UN_COMPOUND", distance_km=5, base_speed_kmh=50, status=RoadStatus.CLEAR, danger_score=5.0),
+        Road("MEDICAL_POST", "REFUGEE_CAMP", distance_km=4, base_speed_kmh=60, status=RoadStatus.CLEAR, danger_score=3.0),
+        Road("CAMP_NORTH", "UN_COMPOUND", distance_km=4, base_speed_kmh=65, status=RoadStatus.DAMAGED, danger_score=3.8),
     ]
     for road in roads:
         graph.add_road(road)
